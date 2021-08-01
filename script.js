@@ -86,6 +86,8 @@ function buildComment(comment) {
     flexRow.classList.remove("active");
     body.innerText = editInput.value;
   });
+
+  console.log('retry')
 }
 
 async function deleteData(event) {
