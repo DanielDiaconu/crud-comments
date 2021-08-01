@@ -87,7 +87,7 @@ function buildComment(comment) {
     body.innerText = editInput.value;
   });
 
-  console.log('retry')
+  console.log("secondary commit");
 }
 
 async function deleteData(event) {
