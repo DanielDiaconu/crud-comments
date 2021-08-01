@@ -11,16 +11,28 @@ getComments();
 
 async function commentPost(e) {
   e.preventDefault();
+  if (!payload.name || !payload.email || !payload.body) {
+    alert("Please complete the input");
+    return;
+  }
 
-  await fetch("http://localhost:3000/comments", {
+  let response = await fetch("http://localhost:3000/comments", {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
   });
+  let data = await response.json();
+
+  payload.id = data.id;
+  console.log(payload);
 
   buildComment(payload);
+  const inputs = document.querySelectorAll(".form-control");
+  for (let object of inputs) {
+    object.value = "";
+  }
 }
 
 function postData(e) {
@@ -92,9 +104,13 @@ function buildComment(comment) {
 
 async function deleteData(event) {
   const id = event.target.id;
-  await fetch(`http://localhost:3000/comments/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    await fetch(`http://localhost:3000/comments/${id}`, {
+      method: "DELETE",
+    });
 
-  event.target.parentElement.parentElement.remove();
+    event.target.parentElement.parentElement.remove();
+  } catch (error) {
+    console.log("try a");
+  }
 }
