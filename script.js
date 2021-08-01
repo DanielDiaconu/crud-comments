@@ -11,7 +11,7 @@ getComments();
 
 async function commentPost(e) {
   e.preventDefault();
-  console.log(payload);
+
   await fetch("http://localhost:3000/comments", {
     method: "POST",
     body: JSON.stringify(payload),
